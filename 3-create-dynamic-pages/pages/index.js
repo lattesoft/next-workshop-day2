@@ -1,4 +1,5 @@
 import Layout from '../components/MyLayout.js'
+import Link from 'next/link';
 
 const posts = [
   {
@@ -20,9 +21,16 @@ export default function Index() {
     <Layout>
       <p>Hello Next.js</p>
       <ol>
-      {posts.map((post,index)=>{
-      return <li>{post.title}</li>
-      })}
+      {
+        posts.map((post,index)=>{
+          return <li key={index}>
+            <Link href={`/post?title=${post.title}`}>
+              <a>{post.title}</a>
+            </Link>
+            {/* <Link href={"/post?title="+post.title}>{post.title}</Link> */}
+            </li>
+        })
+      }
       </ol>
     </Layout>
   )
