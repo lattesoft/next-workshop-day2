@@ -1,5 +1,7 @@
 import Layout from '../components/MyLayout.js'
 import Link from 'next/link'
+import fetch from 'isomorphic-unfetch'
+import { useState,useEffect } from 'react'
 
 const PostLink = props => (
   <li>
@@ -10,14 +12,28 @@ const PostLink = props => (
 )
 
 export default function Blog() {
+  const [posts,setPosts] = useState([]);
+ 
+  useEffect(()=>{
+    async function fetchAPI(){
+      const res = await fetch("https://api.tvmaze.com/search/shows?q=naruto");
+      const data = await res.json()
+      setPosts(data);
+    }
+    fetchAPI();
+  },[]);
+
   return (
     <Layout>
       <h1>My Blog</h1>
-      <ul>
-        <PostLink id="hello-nextjs" />
-        <PostLink id="learn-nextjs" />
-        <PostLink id="deploy-nextjs" />
-      </ul>
+      <ol>
+        {posts.map((post)=>(
+          <>
+              <PostLink id={post.show.id} /> 
+              {post.show.name}
+          </>
+        ))}
+      </ol>
     </Layout>
   )
 }

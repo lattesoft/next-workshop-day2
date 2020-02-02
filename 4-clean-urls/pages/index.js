@@ -1,15 +1,22 @@
 import Layout from '../components/MyLayout.js';
 import Link from 'next/link';
+import fetch from 'isomorphic-unfetch'
 
 const PostLink = props => (
   <li>
-    <Link href={`/post?title=${props.title}`}>
+    <Link href={escape("/post/"+props.title)}>
       <a>{props.title}</a>
     </Link>
   </li>
 );
 
 export default function Blog() {
+
+  fetch("https://api.tvmaze.com/search/shows?q=naruto").then((res)=>{
+    console.log(res);
+  });
+  
+
   return (
     <Layout>
       <h1>My Blog</h1>
