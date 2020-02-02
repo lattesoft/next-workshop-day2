@@ -11,4 +11,4 @@ function Index() {
   )
 }
 
-export default withLayout()(Index);
+export default withLayout("view-index")(Index);

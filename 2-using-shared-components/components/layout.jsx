@@ -1,14 +1,16 @@
 import Header from './header';
 
-export const withLayout =  () => {
+export const withLayout =  (permission) => { 
     return Component=>{
-        return ()=>(
-            <>
+        return ()=>{
+            console.log(permission);
+            return <>
                 <Header/>
                 <p>This is a layout</p>
-                <p><Component/></p>
+                <Component/>
                 <p>This is a footer</p>
             </>
-        )
+            
+        }
     }
 }
