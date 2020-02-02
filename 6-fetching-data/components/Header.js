@@ -7,6 +7,7 @@ const linkStyle = {
 export default function Header() {
   return (
     <div>
+      <p>Hello</p>
       <Link href="/">
         <a style={linkStyle}>Home</a>
       </Link>

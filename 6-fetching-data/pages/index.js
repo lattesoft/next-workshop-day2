@@ -3,6 +3,7 @@ import Link from 'next/link'
 import fetch from 'isomorphic-unfetch'
 import { useState,useEffect } from 'react'
 
+
 const PostLink = props => (
   <li>
     <Link href="/p/[id]" as={`/p/${props.id}`}>

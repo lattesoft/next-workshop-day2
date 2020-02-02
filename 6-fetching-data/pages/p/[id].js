@@ -7,6 +7,15 @@ function Post(props) {
     <Layout>
       <p>{props.post.name}</p>
       <p>This is the blog post content.</p>
+
+      <style jsx global>
+        {`
+        p{
+          color: red;
+        }
+      `}
+      </style>
+      
     </Layout>
   )
 }
