@@ -1,13 +1,24 @@
 import { useRouter } from 'next/router'
 import Layout from '../../components/MyLayout.js'
 
-export default function Post() {
-  const router = useRouter()
+function Post(props) {
 
   return (
     <Layout>
-      <h1>{router.query.id}</h1>
+      <p>{props.post.name}</p>
       <p>This is the blog post content.</p>
     </Layout>
   )
 }
+
+Post.getInitialProps = async (context)=>{
+  console.log(context.query.id);
+  const {id} = context.query;
+  const res = await fetch("https://api.tvmaze.com/shows/"+id);
+  const data = await res.json()
+  return {
+    post: data
+  }
+}
+
+export default Post;
