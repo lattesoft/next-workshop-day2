@@ -11,23 +11,12 @@ const PostLink = props => (
   </li>
 )
 
-export default function Blog() {
-  const [posts,setPosts] = useState([]);
- 
-  useEffect(()=>{
-    async function fetchAPI(){
-      const res = await fetch("https://api.tvmaze.com/search/shows?q=naruto");
-      const data = await res.json()
-      setPosts(data);
-    }
-    fetchAPI();
-  },[]);
-
+const Index = (props) => {
   return (
     <Layout>
       <h1>My Blog</h1>
       <ol>
-        {posts.map((post)=>(
+        {props.posts.map((post)=>(
           <>
               <PostLink id={post.show.id} /> 
               {post.show.name}
@@ -37,3 +26,13 @@ export default function Blog() {
     </Layout>
   )
 }
+
+Index.getInitialProps = async ()=>{
+  const res = await fetch("https://api.tvmaze.com/search/shows?q=naruto");
+  const data = await res.json()
+  return {
+    posts: data
+  }
+}
+
+export default Index;
